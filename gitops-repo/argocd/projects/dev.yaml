@@ -25,6 +25,8 @@ spec:
       kind: Namespace
 
   namespaceResourceWhitelist:
+    - group: 'argoproj.io'
+      kind: Application
     - group: 'apps'
       kind: Deployment
     - group: 'apps'

@@ -12,14 +12,13 @@ spec:
     - 'https://github.com/YOUR_ORG/spring-boot-realworld-example-app.git'
 
   destinations:
-    # Control cluster (for parent Applications)
+    # In-cluster mode — ArgoCD hub and workloads share the same cluster
     - namespace: argocd
       server: https://kubernetes.default.svc
-    # Dev EKS cluster only
     - namespace: 'java-app-dev'
-      server: 'https://dev-eks-endpoint.eks.amazonaws.com'
+      server: https://kubernetes.default.svc
     - namespace: 'react-app-dev'
-      server: 'https://dev-eks-endpoint.eks.amazonaws.com'
+      server: https://kubernetes.default.svc
 
   clusterResourceWhitelist:
     - group: ''

@@ -19,8 +19,8 @@ spec:
         - values.yaml
         - ../applications/dev/react-app-dev-values.yaml
   destination:
-    # TODO: replace with cluster 2 API server URL after cluster 2 is registered in ArgoCD
-    server: https://REPLACE_WITH_CLUSTER2_API_URL
+    # In-cluster mode — both ArgoCD and the workloads live on the same cluster
+    server: https://kubernetes.default.svc
     namespace: react-app-dev
   syncPolicy:
     automated:

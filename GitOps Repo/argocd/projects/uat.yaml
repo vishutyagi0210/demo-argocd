@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: uat
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: UAT environment — manual sync, gated by team lead
+
+  sourceRepos:
+    - 'https://github.com/YOUR_ORG/spring-boot-realworld-example-app.git'
+
+  destinations:
+    # Control cluster (for parent Applications)
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+    # UAT EKS cluster only
+    - namespace: 'java-app-uat'
+      server: 'https://uat-eks-endpoint.eks.amazonaws.com'
+    - namespace: 'react-app-uat'
+      server: 'https://uat-eks-endpoint.eks.amazonaws.com'
+
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+
+  namespaceResourceWhitelist:
+    - group: 'apps'
+      kind: Deployment
+    - group: 'apps'
+      kind: ReplicaSet
+    - group: ''
+      kind: Service
+    - group: ''
+      kind: ConfigMap
+    - group: ''
+      kind: Secret
+    - group: ''
+      kind: ServiceAccount
+    - group: 'networking.k8s.io'
+      kind: Ingress
+    - group: 'networking.k8s.io'
+      kind: NetworkPolicy
+    - group: 'autoscaling'
+      kind: HorizontalPodAutoscaler
+    - group: 'policy'
+      kind: PodDisruptionBudget
+
+  orphanedResources:
+    warn: true

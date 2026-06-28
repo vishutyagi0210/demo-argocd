@@ -1,0 +1,79 @@
+nameOverride: java-app-dev
+fullnameOverride: java-app-dev
+
+global:
+  replicaCount: 1
+
+deployment:
+  image:
+    name: "docker.io/vishu0210/java-app-dev"
+    tag: "latest"
+
+  resources:
+    limits:
+      cpu: 10m
+      memory: 32Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: http
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: http
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
+
+service:
+  type: ClusterIP
+  specs:
+    - name: http
+      port: 80
+      targetPort: 8080
+
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations: {}
+  hosts:
+    - host: java-app-dev-dev.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+
+pdb:
+  enabled: false
+  minAvailable: 1
+
+
+configmap:
+  enabled: false
+  data: {}
+
+
+secret:
+  enabled: false
+  data: {}
+
+
+networkPolicy:
+  enabled: false
+
+hpa:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPU: 70
+  targetMemory: 80

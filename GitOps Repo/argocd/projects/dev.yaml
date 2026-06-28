@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Dev environment — auto-sync enabled
+
+  sourceRepos:
+    - 'https://github.com/YOUR_ORG/spring-boot-realworld-example-app.git'
+
+  destinations:
+    # Control cluster (for parent Applications)
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+    # Dev EKS cluster only
+    - namespace: 'java-app-dev'
+      server: 'https://dev-eks-endpoint.eks.amazonaws.com'
+    - namespace: 'react-app-dev'
+      server: 'https://dev-eks-endpoint.eks.amazonaws.com'
+
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+
+  namespaceResourceWhitelist:
+    - group: 'apps'
+      kind: Deployment
+    - group: 'apps'
+      kind: ReplicaSet
+    - group: ''
+      kind: Service
+    - group: ''
+      kind: ConfigMap
+    - group: ''
+      kind: Secret
+    - group: ''
+      kind: ServiceAccount
+    - group: 'networking.k8s.io'
+      kind: Ingress
+    - group: 'networking.k8s.io'
+      kind: NetworkPolicy
+    - group: 'autoscaling'
+      kind: HorizontalPodAutoscaler
+    - group: 'policy'
+      kind: PodDisruptionBudget
+
+  orphanedResources:
+    warn: true

@@ -18,7 +18,7 @@ spec:
   source:
     repoURL: 'https://github.com/vishutyagi0210/demo-argocd.git'
     targetRevision: HEAD
-    path: helm
+    path: gitops-repo/helm
     helm:
       valueFiles:
         - values.yaml

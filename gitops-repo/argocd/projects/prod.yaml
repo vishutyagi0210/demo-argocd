@@ -14,7 +14,7 @@ spec:
   description: Prod environment — manual sync with approval gate
 
   sourceRepos:
-    - 'https://github.com/YOUR_ORG/spring-boot-realworld-example-app.git'
+    - 'https://github.com/vishutyagi0210/demo-argocd.git'
 
   destinations:
     # In-cluster mode — ArgoCD hub and workloads share the same cluster

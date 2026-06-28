@@ -3,6 +3,7 @@ fullnameOverride: react-app-uat
 
 global:
   replicaCount: 2
+  namespace: react-app-uat
 
 deployment:
   image:

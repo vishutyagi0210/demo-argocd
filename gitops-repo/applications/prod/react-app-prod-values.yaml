@@ -3,6 +3,7 @@ fullnameOverride: react-app-prod
 
 global:
   replicaCount: 3
+  namespace: react-app-prod
 
 deployment:
   image:

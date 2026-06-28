@@ -3,6 +3,7 @@ fullnameOverride: java-app-uat
 
 global:
   replicaCount: 2
+  namespace: java-app-uat
 
 deployment:
   image:

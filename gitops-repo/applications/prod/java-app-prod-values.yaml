@@ -3,6 +3,7 @@ fullnameOverride: java-app-prod
 
 global:
   replicaCount: 3
+  namespace: java-app-prod
 
 deployment:
   image:

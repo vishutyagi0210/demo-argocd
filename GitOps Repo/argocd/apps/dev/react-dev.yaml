@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: 
+  name: react-app-dev
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,15 +11,16 @@ metadata:
 spec:
   project: dev
   source:
-    repoURL: 
+    repoURL: 'https://github.com/vishutyagi0210/demo-argocd.git'
     targetRevision: HEAD
-    path: helm/platform-app
+    path: helm
     helm:
       valueFiles:
         - values.yaml
-        - ../../applications/app7/dev-values.yaml
+        - ../applications/dev/react-app-dev-values.yaml
   destination:
-    server: https://dev-eks-endpoint.eks.amazonaws.com
+    # TODO: replace with cluster 2 API server URL after cluster 2 is registered in ArgoCD
+    server: https://REPLACE_WITH_CLUSTER2_API_URL
     namespace: react-app-dev
   syncPolicy:
     automated:

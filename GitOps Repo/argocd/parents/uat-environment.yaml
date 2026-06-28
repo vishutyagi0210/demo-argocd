@@ -19,7 +19,7 @@ metadata:
 spec:
   project: uat
   source:
-    repoURL: 'https://github.com/YOUR_ORG/spring-boot-realworld-example-app.git'
+    repoURL: 'https://github.com/vishutyagi0210/demo-argocd.git'
     targetRevision: HEAD
     path: argocd/apps/uat
   destination:

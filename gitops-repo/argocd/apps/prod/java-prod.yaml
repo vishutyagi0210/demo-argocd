@@ -1,8 +1,3 @@
-# ============================================================
-# Child Application — java-app6 (Prod)
-# Purpose: Deploys app6 to the prod EKS cluster
-# Sync: Manual + approval gate
-# ============================================================
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

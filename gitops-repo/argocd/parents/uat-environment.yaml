@@ -21,7 +21,7 @@ spec:
   source:
     repoURL: 'https://github.com/vishutyagi0210/demo-argocd.git'
     targetRevision: HEAD
-    path: argocd/apps/uat
+    path: gitops-repo/argocd/apps/uat
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

@@ -17,7 +17,7 @@ spec:
     helm:
       valueFiles:
         - values.yaml
-        - ../applications/dev/java-app-dev-values.yaml
+        - ../../applications/dev/java-app-dev-values.yaml
   destination:
     # In-cluster mode — both ArgoCD and the workloads live on the same cluster
     server: https://kubernetes.default.svc

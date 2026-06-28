@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: 'https://github.com/vishutyagi0210/demo-argocd.git'
     targetRevision: HEAD
-    path: argocd/apps/dev
+    path: gitops-repo/argocd/apps/dev
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

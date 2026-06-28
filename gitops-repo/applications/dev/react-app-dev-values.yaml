@@ -3,6 +3,7 @@ fullnameOverride: react-app-dev
 
 global:
   replicaCount: 1
+  namespace: react-app-dev
 
 deployment:
   image:

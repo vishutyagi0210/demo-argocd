@@ -3,6 +3,7 @@ fullnameOverride: java-app-dev
 
 global:
   replicaCount: 1
+  namespace: java-app-dev
 
 deployment:
   image:

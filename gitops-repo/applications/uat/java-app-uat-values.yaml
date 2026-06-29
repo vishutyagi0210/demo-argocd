@@ -12,11 +12,11 @@ deployment:
 
   resources:
     limits:
-      cpu: 100m
-      memory: 64Mi
+      cpu: 250m
+      memory: 256Mi
     requests:
-      cpu: 10m
-      memory: 32Mi
+      cpu: 100m
+      memory: 126Mi
 
   livenessProbe:
     httpGet:

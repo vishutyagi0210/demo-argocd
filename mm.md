@@ -338,3 +338,17 @@ git revert HEAD && git push origin main
 ## 6. The One-Paragraph Version (for when you're in a hurry next time)
 
 > ArgoCD is just CRDs sitting in `etcd`. RBAC (set once, cluster-wide) decides if ArgoCD's controller can touch the cluster at all. An **AppProject** is a per-environment sandbox: which repo, which namespaces, which K8s kinds are allowed — including, critically, whether it's allowed to create *other Applications* (needed for App-of-Apps). A **parent Application** just points at a git folder and says "treat every YAML in here as something to apply" — when those YAMLs are themselves Applications, that's the App-of-Apps pattern, and the children appear automatically. A **child Application** points at a Helm chart path plus a values file, and Helm renders real Kubernetes manifests from that. **Synced** means ArgoCD successfully pushed manifests to the cluster; **Healthy** means the resulting pod is actually running and passing probes — these are independent, and "Synced but Degraded" always means a workload problem (bad image, crashing app), never a GitOps wiring problem. Debug top-down through this stack, never bottom-up by guessing.
+
+
+
+
+
+kubectl apply -f gitops-repo/argocd/projects/dev.yaml
+kubectl apply -f gitops-repo/argocd/projects/prod.yaml
+kubectl apply -f gitops-repo/argocd/projects/uat.yaml
+kubectl apply -f gitops-repo/argocd/parents/dev-environment.yaml
+kubectl apply -f gitops-repo/argocd/parents/prod-environment.yaml
+kubectl apply -f gitops-repo/argocd/parents/uat-environment.yaml
+
+# Then just watch:
+kubectl get applications -n argocd -w

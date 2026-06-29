@@ -106,8 +106,9 @@ server:
     enabled: false
   service:
     type: LoadBalancer
-    # No "Internal" annotation here — this is what makes it PUBLIC.
-    # GCP will assign a real internet-routable IP.
+    # loadBalancerIP: "10.10.23.4"
+    annotations:
+      networking.gke.io/load-balancer-type: "Internal"
     servicePortHttps: 443
     servicePortHttp: 80
 repoServer:

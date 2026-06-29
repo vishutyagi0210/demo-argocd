@@ -41,7 +41,7 @@ service:
   specs:
     - name: http
       port: 80
-      targetPort: 8080
+      targetPort: 3000
 
 ingress:
   enabled: false

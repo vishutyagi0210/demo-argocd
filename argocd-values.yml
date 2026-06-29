@@ -1,0 +1,68 @@
+global:
+  domain: argocd.tyagi.fun
+controller:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512Mi
+    limits:
+      cpu: 2000m
+      memory: 2Gi
+server:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+  # ArgoCD terminates its own TLS using the cert we create in Section 3.
+  ingress:
+    enabled: false
+  service:
+    type: LoadBalancer
+    # No "Internal" annotation here — this is what makes it PUBLIC.
+    # GCP will assign a real internet-routable IP.
+    servicePortHttps: 443
+    servicePortHttp: 80
+repoServer:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+dex:
+  enabled: true
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+applicationSet:
+  enabled: true
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+notifications:
+  enabled: true
+configs:
+  cm:
+    admin.enabled: "true"
+    timeout.reconciliation: 180s
+    application.resourceTrackingMethod: label
+  params:
+    server.insecure: false
+  secret:
+    createSecret: true
